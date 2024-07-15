@@ -13,6 +13,8 @@ public partial class PurchaseOrder
 
     public decimal TotalAmount { get; set; }
 
+    public int Status { get; set; }
+
     public virtual ICollection<PurchaseOrderDetail> PurchaseOrderDetails { get; set; } = new List<PurchaseOrderDetail>();
 
     public virtual Supplier? Supplier { get; set; }

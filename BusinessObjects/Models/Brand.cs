@@ -9,5 +9,7 @@ public partial class Brand
 
     public string BrandName { get; set; } = null!;
 
+    public int Status { get; set; }
+
     public virtual ICollection<Phone> Phones { get; set; } = new List<Phone>();
 }

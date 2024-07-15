@@ -15,6 +15,8 @@ public partial class PurchaseOrderDetail
 
     public decimal Price { get; set; }
 
+    public int Status { get; set; }
+
     public virtual PurchaseOrder? Order { get; set; }
 
     public virtual Phone? Phone { get; set; }
