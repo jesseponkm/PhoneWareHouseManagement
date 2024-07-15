@@ -1,4 +1,5 @@
 ﻿using BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
 
 namespace Data_Access_Layer
@@ -13,7 +14,7 @@ namespace Data_Access_Layer
             var list = new List<Phone>();
             try
             {
-                list = context.Phones.ToList();
+                list = context.Phones.Include(p => p.Brand).ToList();
             }
             catch (Exception ex)
             {
