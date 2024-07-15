@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessObjects;
 using BusinessObjects.Models;
 
-namespace Repositories
+namespace Services
 {
-    public interface IPhoneRepository
+    public interface IPhoneService
     {
         List<Phone> GetPhones();
         Phone GetPhoneById(int id);
         void AddPhone(Phone phone);
         void UpdatePhone(Phone phone);
-        void DeletePhone(Phone phone);  
+        void DeletePhone(Phone phone);
     }
 }

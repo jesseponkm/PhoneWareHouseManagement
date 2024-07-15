@@ -1,39 +1,45 @@
 ﻿using BusinessObjects.Models;
+using Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data_Access_Layer;
 
-namespace Repositories
+namespace Services
 {
-    public class PhoneRepository : IPhoneRepository
+    public class PhoneService : IPhoneService
     {
-        
+        private readonly IPhoneRepository repository;
+
+        public PhoneService()
+        {
+            repository = new PhoneRepository();
+        }
+
         public void AddPhone(Phone phone)
         {
-           PhoneDAO.AddPhone(phone);
+            repository.AddPhone(phone);
         }
 
         public void DeletePhone(Phone phone)
         {
-            PhoneDAO.DeletePhone(phone);
+            throw new NotImplementedException();
         }
 
         public Phone GetPhoneById(int id)
         {
-            return PhoneDAO.GetPhoneById(id);
+            throw new NotImplementedException();
         }
 
         public List<Phone> GetPhones()
         {
-            return PhoneDAO.GetPhones();
+            throw new NotImplementedException();
         }
 
         public void UpdatePhone(Phone phone)
         {
-            PhoneDAO.UpdatePhone(phone); 
+            throw new NotImplementedException();
         }
     }
 }

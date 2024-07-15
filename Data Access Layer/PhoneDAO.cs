@@ -22,6 +22,11 @@ namespace Data_Access_Layer
             return list;
         }
 
+        public static Phone GetPhoneById(int id)
+        {
+            return context.Phones.SingleOrDefault( p => p.PhoneId == id);
+        }
+
         public static void AddPhone(Phone phone)
         {
             try
@@ -53,12 +58,8 @@ namespace Data_Access_Layer
         {
             try
             {
-                Phone p = context.Phones.FirstOrDefault(o => o.PhoneId == phone.PhoneId);
-                if (p != null)
-                {
-                    p.Status = false;
-                    context.SaveChanges();
-                }
+                phone.Status = 0;
+                context.Phones.Update(phone);
             }
             catch(Exception ex)
             {
