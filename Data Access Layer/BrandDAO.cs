@@ -1,5 +1,5 @@
 ﻿using BusinessObjects.Models;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,16 +14,16 @@ namespace Data_Access_Layer
         private BrandDAO() { }
         public static List<Brand> GetBrands()
         {
-            var brands = new List<Brand>();
+            var list = new List<Brand>();
             try
             {
-                brands = context.Brands.ToList();
+                list = context.Brands.ToList();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            return brands;
+            return list;
         }
         public static Brand GetBrandById(int id)
         {

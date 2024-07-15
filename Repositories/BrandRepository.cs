@@ -10,27 +10,29 @@ namespace Repositories
 {
     public class BrandRepository : IBrandRepository
     {
-        void IBrandRepository.AddBrand(Brand brand)
+        public void AddBrand(Brand brand)
         {
             BrandDAO.InsertBrand(brand);
         }
 
-        void IBrandRepository.DeleteBrand(Brand brand)
+        public void DeleteBrand(Brand brand)
         {
             BrandDAO.DeleteBrand(brand);
         }
 
-        Brand IBrandRepository.GetBrandById(int id)
+        public Brand GetBrandById(int id)
         {
             return BrandDAO.GetBrandById(id);
         }
 
-        List<Brand> IBrandRepository.GetBrands()
+        public List<Brand> GetBrands()
         {
-            return BrandDAO.GetBrands();
+            List<Brand> list = new List<Brand>();
+            list = BrandDAO.GetBrands();
+            return list;
         }
 
-        void IBrandRepository.UpdateBrand(Brand brand)
+        public void UpdateBrand(Brand brand)
         {
             BrandDAO.UpdateBrand(brand);
         }
