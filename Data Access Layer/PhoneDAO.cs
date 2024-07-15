@@ -25,7 +25,7 @@ namespace Data_Access_Layer
 
         public static Phone GetPhoneById(int id)
         {
-            return context.Phones.SingleOrDefault( p => p.PhoneId == id);
+            return context.Phones.Include(p => p.Brand).SingleOrDefault( p => p.PhoneId == id);
         }
 
         public static void AddPhone(Phone phone)

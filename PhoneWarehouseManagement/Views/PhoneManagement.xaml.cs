@@ -21,20 +21,24 @@ namespace PhoneWarehouseManagement.Views
     /// </summary>
     public partial class PhoneManagement : Window
     {
-        private readonly IPhoneService context;
+        private readonly IPhoneService phoneService;
+        private readonly IBrandService brandService;
         public PhoneManagement()
         {
             InitializeComponent();
-            context = new PhoneService();
+            phoneService = new PhoneService();
+            brandService = new BrandService();
             LoadPhone();
+            LoadBrand();
         }
         public void LoadPhone()
         {
-            grdPhone.ItemsSource = context.GetPhones();
+            grdPhone.ItemsSource = phoneService.GetPhones();
         }
         public void LoadBrand()
         {
-            cboBrand.SelectedItem = context.GetBrands();
+            cboBrand.SelectedItem = brandService.GetBrands();
+            cboBrand.SelectedIndex = 0;
         }
     }
 }

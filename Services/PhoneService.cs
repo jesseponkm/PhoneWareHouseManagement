@@ -24,22 +24,22 @@ namespace Services
 
         public void DeletePhone(Phone phone)
         {
-            throw new NotImplementedException();
+            repository.DeletePhone(phone);
         }
 
         public Phone GetPhoneById(int id)
         {
-            throw new NotImplementedException();
+            return repository.GetPhoneById(id);
         }
 
         public List<Phone> GetPhones()
         {
-            throw new NotImplementedException();
+            return repository.GetPhones();
         }
 
         public void UpdatePhone(Phone phone)
         {
-            throw new NotImplementedException();
+            repository.UpdatePhone(phone);
         }
     }
 }
