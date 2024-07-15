@@ -14,7 +14,7 @@ namespace Data_Access_Layer
             var list = new List<Phone>();
             try
             {
-                list = context.Phones.Include(p => p.Brand).ToList();
+                list = context.Phones.Include(p => p.Brand).Where(p => p.Status == 1).ToList();
             }
             catch (Exception ex)
             {
@@ -25,7 +25,7 @@ namespace Data_Access_Layer
 
         public static Phone GetPhoneById(int id)
         {
-            return context.Phones.Include(p => p.Brand).SingleOrDefault( p => p.PhoneId == id);
+            return context.Phones.Include(p => p.Brand).SingleOrDefault( p => p.PhoneId == id && p.Status == 1);
         }
 
         public static void AddPhone(Phone phone)
