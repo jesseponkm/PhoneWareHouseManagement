@@ -17,5 +17,7 @@ public partial class Supplier
 
     public string? Address { get; set; }
 
+    public int Status { get; set; }
+
     public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; } = new List<PurchaseOrder>();
 }

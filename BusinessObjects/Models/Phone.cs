@@ -17,6 +17,8 @@ public partial class Phone
 
     public string? Description { get; set; }
 
+    public int Status { get; set; }
+
     public virtual Brand? Brand { get; set; }
 
     public virtual ICollection<PurchaseOrderDetail> PurchaseOrderDetails { get; set; } = new List<PurchaseOrderDetail>();
