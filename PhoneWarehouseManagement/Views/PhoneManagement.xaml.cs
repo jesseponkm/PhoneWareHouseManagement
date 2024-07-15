@@ -37,7 +37,7 @@ namespace PhoneWarehouseManagement.Views
         }
         public void LoadBrand()
         {
-            cboBrand.SelectedItem = brandService.GetBrands();
+            cboBrand.ItemsSource = brandService.GetBrands();
             cboBrand.SelectedIndex = 0;
         }
     }
