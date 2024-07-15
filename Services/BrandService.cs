@@ -10,35 +10,36 @@ namespace Services
 {
     public class BrandService : IBrandService
     {
-        private readonly IBrandRepository _brandRepository;
+        private readonly IBrandRepository brandRepository;
         public BrandService()
         {
-            _brandRepository = new BrandRepository();
+            brandRepository = new BrandRepository();
 
         }
-        void IBrandService.AddBrand(Brand brand)
+
+        public void AddBrand(Brand brand)
         {
-            _brandRepository.AddBrand(brand);
+            brandRepository.AddBrand(brand);
         }
 
-        void IBrandService.DeleteBrand(Brand brand)
+        public void DeleteBrand(Brand brand)
         {
-            _brandRepository?.DeleteBrand(brand);
+            brandRepository.DeleteBrand(brand);
         }
 
-        Brand IBrandService.GetBrandById(int id)
+        public Brand GetBrandById(int id)
         {
-            return _brandRepository.GetBrandById(id);
+            return brandRepository.GetBrandById(id);
         }
 
-        List<Brand> IBrandService.GetBrands()
+        public List<Brand> GetBrands()
         {
-            return _brandRepository.GetBrands();
+            return brandRepository.GetBrands();
         }
 
-        void IBrandService.UpdateBrand(Brand brand)
+        public void UpdateBrand(Brand brand)
         {
-            _brandRepository.UpdateBrand(brand);
+            brandRepository.UpdateBrand(brand);
         }
     }
 }
