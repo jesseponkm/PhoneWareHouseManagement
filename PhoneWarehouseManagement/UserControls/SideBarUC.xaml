@@ -6,9 +6,10 @@
              xmlns:local="clr-namespace:PhoneWarehouseManagement.UserControls"
              mc:Ignorable="d" 
             >
-    <Grid Height="450" Width="100" Background="Beige">
-        <Label Content="Management" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Button Content="Phone" HorizontalAlignment="Center" Name="btnPhone" Margin="0,70,0,0" VerticalAlignment="Top" Width="100" Click="btnPhone_Click"/>
+    <Grid Height="450" Width="100" Background="AliceBlue">
+        <Label Content="Management" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14"/>
+        <Button Content="Phone" HorizontalAlignment="Center" Name="btnPhone" Margin="0,33,0,0" VerticalAlignment="Top" Width="100" Click="btnPhone_Click"/>
+        <Button Content="Suplier" HorizontalAlignment="Center" Name="btnSuplier" Margin="0,60,0,0" VerticalAlignment="Top" Width="100" Click="btnSuplier_Click"/>
 
     </Grid>
 </UserControl>

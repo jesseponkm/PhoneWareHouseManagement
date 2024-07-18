@@ -8,5 +8,6 @@ namespace Data_Access_Layer
 {
     internal class SupplierDAO
     {
+
     }
 }

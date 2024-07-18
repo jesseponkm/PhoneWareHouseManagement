@@ -17,7 +17,7 @@ namespace Data_Access_Layer
             var list = new List<Brand>();
             try
             {
-                list = context.Brands.ToList();
+                list = context.Brands.Include(p => p.Phones).ToList();
             }
             catch (Exception ex)
             {
