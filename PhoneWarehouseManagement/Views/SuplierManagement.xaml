@@ -30,7 +30,7 @@
                     <ColumnDefinition Width="12*"/>
                     <ColumnDefinition Width="7*"/>
                 </Grid.ColumnDefinitions>
-                <DataGrid x:Name="grdSuplier" AutoGenerateColumns="False" SelectionChanged="grdPhone_SelectionChanged" Grid.ColumnSpan="2">
+                <DataGrid x:Name="grdSuplier" AutoGenerateColumns="False" SelectionChanged="grdSuplier_SelectionChanged" Grid.ColumnSpan="2">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id" Width="0.3*" Binding="{Binding SuplierId}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Name" Width="0.6*" Binding="{Binding SuplierName}"></DataGridTextColumn>
@@ -55,10 +55,10 @@
             <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="10,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.475,0.514" Height="25"/>
             <Label Content="Address" HorizontalAlignment="Left" Margin="5,240,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="txtAddress" HorizontalAlignment="Left" Margin="10,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" RenderTransformOrigin="0.475,0.514" Height="50"/>
-            <Button Content="Clear" Width="80" x:Name="btnClear" HorizontalAlignment="Left" Margin="113,343,0,0" VerticalAlignment="Top" />
-            <Button Content="Add" x:Name="btnAdd" HorizontalAlignment="Left" Margin="10,343,0,0" VerticalAlignment="Top" Width="80"/>
-            <Button Content="Update" x:Name="btnUpdate" HorizontalAlignment="Left" Margin="10,378,0,0" VerticalAlignment="Top" Width="80"/>
-            <Button Content="Delete" x:Name="btnDelete" HorizontalAlignment="Left" Margin="113,378,0,0" VerticalAlignment="Top" Width="80"/>
+            <Button Content="Clear" Width="80" x:Name="btnClear" HorizontalAlignment="Left" Margin="113,343,0,0" VerticalAlignment="Top" Click="btnClear_Click" />
+            <Button Content="Add" x:Name="btnAdd" HorizontalAlignment="Left" Margin="10,343,0,0" VerticalAlignment="Top" Width="80" Click="btnAdd_Click"/>
+            <Button Content="Update" x:Name="btnUpdate" HorizontalAlignment="Left" Margin="10,378,0,0" VerticalAlignment="Top" Width="80" Click="btnUpdate_Click"/>
+            <Button Content="Delete" x:Name="btnDelete" HorizontalAlignment="Left" Margin="113,378,0,0" VerticalAlignment="Top" Width="80" Click="btnDelete_Click"/>
         </Grid>
     </Grid>
 </Window>
