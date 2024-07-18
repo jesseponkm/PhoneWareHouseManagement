@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Services;
 using BusinessObjects.Models;
+using Microsoft.IdentityModel.Tokens;
 
 namespace PhoneWarehouseManagement.Views
 {
@@ -41,7 +42,20 @@ namespace PhoneWarehouseManagement.Views
 
         private void LoadBrand()
         {
-            cboBrand.ItemsSource = brandService.GetBrands();
+            var brands = brandService.GetBrands().ToList();
+            cboBrand.ItemsSource = brands;
+            cboBrand.DisplayMemberPath = "BrandName";
+            cboBrand.SelectedValuePath = "BrandId";
+            cboBrand.SelectedIndex = 0;
+
+            var filterBrands = new List<Brand>();
+            filterBrands.Add(new Brand {BrandId = -1, BrandName = "All", Phones = phoneService.GetPhones()});
+            filterBrands.AddRange(brands);
+            filterByBrand.ItemsSource = filterBrands;
+            filterByBrand.DisplayMemberPath = "BrandName";
+            filterByBrand.SelectedValuePath = "BrandId";
+            filterByBrand.SelectedIndex = 0;
+
         }
         private void Clear()
         {
@@ -50,7 +64,7 @@ namespace PhoneWarehouseManagement.Views
             txtDescription.Text = string.Empty ;
             txtPrice.Text = string.Empty;
             txtStock.Text = string.Empty;
-            cboBrand.SelectedValue = null;
+            cboBrand.SelectedIndex = 0;
         }
 
         private void grdPhone_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -62,13 +76,122 @@ namespace PhoneWarehouseManagement.Views
                 txtDescription.Text = phone.Description;
                 txtPrice.Text = phone.Price.ToString();
                 txtStock.Text = phone.Stock.ToString();
-                cboBrand.SelectedValue = phone.Brand.BrandId;
+                cboBrand.SelectedValue = phone.BrandId ;
             }
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             Clear();
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            
+            try
+            {
+                Phone phone = new Phone();
+                if (decimal.TryParse(txtPrice.Text, out decimal price))
+                {
+                    phone.Price = price;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid price!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    txtPrice.Text = string.Empty;
+                    txtPrice.Focus();
+                    return;
+                }
+
+                if (int.TryParse(txtStock.Text, out int stock))
+                {
+                    phone.Stock = stock;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    txtStock.Text = string.Empty;
+                    txtStock.Focus();
+                    return;
+                }
+
+                phone.ModelName = txtModelName.Text;
+                phone.Description = txtDescription.Text;
+                phone.BrandId = int.Parse(cboBrand.SelectedValue.ToString());
+                phoneService.AddPhone(phone);
+                LoadPhone();
+                MessageBox.Show("Add phone successfully!", "Infor", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            } 
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (txtId.Text.IsNullOrEmpty())
+                {
+                    MessageBox.Show("Please choose a phone!", "Infor", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
+                Phone phone = new Phone();
+                phone.PhoneId = int.Parse(txtId.Text);
+                if (decimal.TryParse(txtPrice.Text, out decimal price))
+                {
+                    phone.Price = price;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid price!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    txtPrice.Text = string.Empty;
+                    txtPrice.Focus();
+                    return;
+                }
+
+                if (int.TryParse(txtStock.Text, out int stock))
+                {
+                    phone.Stock = stock;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    txtStock.Text = string.Empty;
+                    txtStock.Focus();
+                    return;
+                }
+
+                phone.ModelName = txtModelName.Text;
+                phone.Description = txtDescription.Text;
+                phone.BrandId = int.Parse(cboBrand.SelectedValue.ToString());
+                phoneService.UpdatePhone(phone);
+                LoadPhone();
+                MessageBox.Show("Update phone successfully!", "Infor", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void filterByBrand_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(filterByBrand.SelectedItem is Brand brand)
+            {
+                grdPhone.ItemsSource = brand.Phones.ToList();
+            } else
+            {
+                LoadPhone();
+            }
+
         }
     }
 }

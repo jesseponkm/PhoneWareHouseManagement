@@ -36,5 +36,16 @@ namespace PhoneWarehouseManagement.UserControls
                 window.Close();
             }
         }
+
+        private void btnSuplier_Click(object sender, RoutedEventArgs e)
+        {
+            SuplierManagement suplierManagement = new SuplierManagement();
+            suplierManagement.Show();
+            Window window = Window.GetWindow(this);
+            if (window != null)
+            {
+                window.Close();
+            }
+        }
     }
 }

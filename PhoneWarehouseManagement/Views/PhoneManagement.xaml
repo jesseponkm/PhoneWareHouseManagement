@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PhoneWarehouseManagement.Views"
         xmlns:uc="clr-namespace:PhoneWarehouseManagement.UserControls"
         mc:Ignorable="d"
-        Title="PhoneManagement" Height="450" Width="800" ResizeMode="NoResize">
+        Title="PhoneManagement" WindowStartupLocation="CenterScreen" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"></ColumnDefinition>
@@ -22,9 +22,15 @@
                 <RowDefinition>
                 </RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0"></Grid>
+            <Grid Grid.Row="0">
+                <ComboBox x:Name="filterByBrand" HorizontalAlignment="Left" Margin="39,0,0,0" VerticalAlignment="Center" Width="87" Height="25" SelectionChanged="filterByBrand_SelectionChanged"/>
+            </Grid>
             <Grid Grid.Row="1">
-                <DataGrid x:Name="grdPhone" AutoGenerateColumns="False" SelectionChanged="grdPhone_SelectionChanged">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="12*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid x:Name="grdPhone" AutoGenerateColumns="False" SelectionChanged="grdPhone_SelectionChanged" Grid.ColumnSpan="2">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id" Width="0.3*" Binding="{Binding PhoneId}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Brand" Width="0.7*" Binding="{Binding Brand.BrandName}"></DataGridTextColumn>
@@ -44,7 +50,7 @@
             <TextBox x:Name="txtModelName" HorizontalAlignment="Left" Margin="10,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.475,0.514" Height="25"/>
             <Label Grid.Column="2" Content="Price" HorizontalAlignment="Left" Margin="108,116,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="txtPrice" Grid.Column="2" HorizontalAlignment="Left" Margin="113,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.475,0.514" Height="25"/>
-            <ComboBox DisplayMemberPath="BrandName" 
+            <ComboBox  
                       x:Name="cboBrand" 
                       HorizontalAlignment="Left" 
                       Margin="113,81,0,0" 
@@ -52,13 +58,15 @@
                       Width="80" 
                       RenderTransformOrigin="-0.383,0.239" 
                       Height="25" 
-                      SelectedValuePath="BrandId"
-                      SelectedValue="{Binding BrandId}"/>
-            <Label Grid.Column="2" Content="Stock" HorizontalAlignment="Left" Margin="5,177,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtStock" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="80" RenderTransformOrigin="0.475,0.514" Height="25"/>
-            <Label Grid.Column="2" Content="Description" HorizontalAlignment="Left" Margin="10,240,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtDescription" Grid.Column="2" HorizontalAlignment="Left" Margin="15,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" RenderTransformOrigin="0.475,0.514" Height="50"/>
-            <Button Content="Clear" x:Name="btnClear" HorizontalAlignment="Left" Margin="153,343,0,0" VerticalAlignment="Top" Click="btnClear_Click"/>
+                     />
+            <Label Content="Stock" HorizontalAlignment="Left" Margin="5,177,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtStock" HorizontalAlignment="Left" Margin="10,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.475,0.514" Height="25"/>
+            <Label Content="Description" HorizontalAlignment="Left" Margin="5,240,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Margin="10,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" RenderTransformOrigin="0.475,0.514" Height="50"/>
+            <Button Content="Clear" Width="80" x:Name="btnClear" HorizontalAlignment="Left" Margin="113,343,0,0" VerticalAlignment="Top" Click="btnClear_Click"/>
+            <Button Content="Add" x:Name="btnAdd" HorizontalAlignment="Left" Margin="10,343,0,0" VerticalAlignment="Top" Width="80" Click="btnAdd_Click"/>
+            <Button Content="Update" x:Name="btnUpdate" HorizontalAlignment="Left" Margin="10,378,0,0" VerticalAlignment="Top" Width="80" Click="btnUpdate_Click"/>
+            <Button Content="Delete" x:Name="btnDelete" HorizontalAlignment="Left" Margin="113,378,0,0" VerticalAlignment="Top" Width="80" Click="btnDelete_Click"/>
         </Grid>
     </Grid>
 </Window>

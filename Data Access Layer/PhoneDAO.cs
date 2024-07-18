@@ -6,7 +6,7 @@ namespace Data_Access_Layer
 {
     public class PhoneDAO
     {
-        private static PhoneWarehouseDbContext context = new PhoneWarehouseDbContext();
+        
         private PhoneDAO() { }
 
         public static List<Phone> GetPhones()
@@ -14,6 +14,7 @@ namespace Data_Access_Layer
             var list = new List<Phone>();
             try
             {
+                using var context = new PhoneWarehouseDbContext();
                 list = context.Phones.Include(p => p.Brand).Where(p => p.Status == 1).ToList();
             }
             catch (Exception ex)
@@ -25,6 +26,7 @@ namespace Data_Access_Layer
 
         public static Phone GetPhoneById(int id)
         {
+            using var context = new PhoneWarehouseDbContext();
             return context.Phones.Include(p => p.Brand).SingleOrDefault( p => p.PhoneId == id && p.Status == 1);
         }
 
@@ -32,6 +34,7 @@ namespace Data_Access_Layer
         {
             try
             {
+                using var context = new PhoneWarehouseDbContext();
                 context.Phones.Add(phone);
                 context.SaveChanges();
             }
@@ -46,6 +49,8 @@ namespace Data_Access_Layer
         {
             try
             {
+                using var context = new PhoneWarehouseDbContext();
+                phone.Status = 1;
                 context.Phones.Update(phone);
                 context.SaveChanges();
             }
@@ -59,13 +64,17 @@ namespace Data_Access_Layer
         {
             try
             {
+                using var context = new PhoneWarehouseDbContext();
                 phone.Status = 0;
                 context.Phones.Update(phone);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw new Exception(ex.Message);    
+                throw new Exception(ex.Message);
             }
-        } 
+        }
+
+       
+
     }
 }
