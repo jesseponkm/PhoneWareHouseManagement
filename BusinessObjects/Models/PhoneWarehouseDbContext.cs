@@ -37,11 +37,11 @@ public partial class PhoneWarehouseDbContext : DbContext
     {
         modelBuilder.Entity<Brand>(entity =>
         {
-            entity.HasKey(e => e.BrandId).HasName("PK__Brand__DAD4F3BE6EE918C5");
+            entity.HasKey(e => e.BrandId).HasName("PK__Brand__DAD4F3BE99032362");
 
             entity.ToTable("Brand");
 
-            entity.HasIndex(e => e.BrandName, "UQ__Brand__2206CE9B78D07591").IsUnique();
+            entity.HasIndex(e => e.BrandName, "UQ__Brand__2206CE9B0A046F01").IsUnique();
 
             entity.Property(e => e.BrandId).HasColumnName("BrandID");
             entity.Property(e => e.BrandName).HasMaxLength(50);
@@ -50,12 +50,12 @@ public partial class PhoneWarehouseDbContext : DbContext
 
         modelBuilder.Entity<Phone>(entity =>
         {
-            entity.HasKey(e => e.PhoneId).HasName("PK__Phones__F3EE4BD00D7E2611");
+            entity.HasKey(e => e.PhoneId).HasName("PK__Phones__F3EE4BD08FEDFFA3");
 
             entity.Property(e => e.PhoneId).HasColumnName("PhoneID");
             entity.Property(e => e.BrandId).HasColumnName("BrandID");
             entity.Property(e => e.ModelName).HasMaxLength(100);
-            entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
             entity.Property(e => e.Status).HasDefaultValue(1);
 
             entity.HasOne(d => d.Brand).WithMany(p => p.Phones)
@@ -65,13 +65,13 @@ public partial class PhoneWarehouseDbContext : DbContext
 
         modelBuilder.Entity<PurchaseOrder>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Purchase__C3905BAF5D89DE52");
+            entity.HasKey(e => e.OrderId).HasName("PK__Purchase__C3905BAF37752015");
 
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
             entity.Property(e => e.OrderDate).HasColumnType("datetime");
             entity.Property(e => e.Status).HasDefaultValue(1);
             entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
-            entity.Property(e => e.TotalAmount).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.TotalAmount).HasColumnType("decimal(18, 0)");
 
             entity.HasOne(d => d.Supplier).WithMany(p => p.PurchaseOrders)
                 .HasForeignKey(d => d.SupplierId)
@@ -80,12 +80,12 @@ public partial class PhoneWarehouseDbContext : DbContext
 
         modelBuilder.Entity<PurchaseOrderDetail>(entity =>
         {
-            entity.HasKey(e => e.OrderDetailId).HasName("PK__Purchase__D3B9D30C5193CC9C");
+            entity.HasKey(e => e.OrderDetailId).HasName("PK__Purchase__D3B9D30CFFC31342");
 
             entity.Property(e => e.OrderDetailId).HasColumnName("OrderDetailID");
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
             entity.Property(e => e.PhoneId).HasColumnName("PhoneID");
-            entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
             entity.Property(e => e.Status).HasDefaultValue(1);
 
             entity.HasOne(d => d.Order).WithMany(p => p.PurchaseOrderDetails)
@@ -99,7 +99,7 @@ public partial class PhoneWarehouseDbContext : DbContext
 
         modelBuilder.Entity<SalesOrder>(entity =>
         {
-            entity.HasKey(e => e.SaleOrderId).HasName("PK__SalesOrd__DB86E3229BADB12E");
+            entity.HasKey(e => e.SaleOrderId).HasName("PK__SalesOrd__DB86E3221DDCA7A9");
 
             entity.Property(e => e.SaleOrderId).HasColumnName("SaleOrderID");
             entity.Property(e => e.CustomerName)
@@ -114,11 +114,11 @@ public partial class PhoneWarehouseDbContext : DbContext
 
         modelBuilder.Entity<SalesOrderDetail>(entity =>
         {
-            entity.HasKey(e => e.SaleDetailId).HasName("PK__SalesOrd__70DB141E99E52B1B");
+            entity.HasKey(e => e.SaleDetailId).HasName("PK__SalesOrd__70DB141EDE0D9865");
 
             entity.Property(e => e.SaleDetailId).HasColumnName("SaleDetailID");
             entity.Property(e => e.PhoneId).HasColumnName("PhoneID");
-            entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
             entity.Property(e => e.SaleOrderId).HasColumnName("SaleOrderID");
 
             entity.HasOne(d => d.Phone).WithMany(p => p.SalesOrderDetails)
@@ -132,7 +132,7 @@ public partial class PhoneWarehouseDbContext : DbContext
 
         modelBuilder.Entity<Supplier>(entity =>
         {
-            entity.HasKey(e => e.SupplierId).HasName("PK__Supplier__4BE66694BCF9A92B");
+            entity.HasKey(e => e.SupplierId).HasName("PK__Supplier__4BE66694B8C729E9");
 
             entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
             entity.Property(e => e.Address).HasMaxLength(200);

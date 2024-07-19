@@ -22,7 +22,7 @@ CREATE TABLE Phones (
     PhoneID INT PRIMARY KEY IDENTITY(1,1),
     ModelName NVARCHAR(100) NOT NULL,
     BrandID INT,
-    Price DECIMAL(18, 2) NOT NULL,
+    Price DECIMAL(18, 0) NOT NULL,
     Stock INT NOT NULL,
     Description NVARCHAR(MAX),
     Status INT NOT NULL DEFAULT 1, -- 1: Tồn tại, 0: Xóa
@@ -47,7 +47,7 @@ CREATE TABLE PurchaseOrders (
     OrderID INT PRIMARY KEY IDENTITY(1,1),
     SupplierID INT,
     OrderDate DATETIME NOT NULL,
-    TotalAmount DECIMAL(18, 2) NOT NULL,
+    TotalAmount DECIMAL(18, 0) NOT NULL,
     Status INT NOT NULL DEFAULT 1, -- 1: Tồn tại, 0: Xóa
     FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID)
 );
@@ -59,7 +59,7 @@ CREATE TABLE PurchaseOrderDetails (
     OrderID INT,
     PhoneID INT,
     Quantity INT NOT NULL,
-    Price DECIMAL(18, 2) NOT NULL,
+    Price DECIMAL(18, 0) NOT NULL,
     Status INT NOT NULL DEFAULT 1, -- 1: Tồn tại, 0: Xóa
     FOREIGN KEY (OrderID) REFERENCES PurchaseOrders(OrderID),
     FOREIGN KEY (PhoneID) REFERENCES Phones(PhoneID)
@@ -83,7 +83,7 @@ CREATE TABLE SalesOrderDetails (
     SaleOrderID INT,
     PhoneID INT,
     Quantity INT NOT NULL,
-    Price DECIMAL(18, 2) NOT NULL,
+    Price DECIMAL(18, 0) NOT NULL,
     FOREIGN KEY (SaleOrderID) REFERENCES SalesOrders(SaleOrderID),
     FOREIGN KEY (PhoneID) REFERENCES Phones(PhoneID)
 );
