@@ -22,43 +22,25 @@ namespace PhoneWarehouseManagement.Views
     /// </summary>
     public partial class PurchaseOrder : Window
     {
-        public List<Phone> SelectedPhones { get; set; }
-
         public PurchaseOrder()
         {
             InitializeComponent();
-            SelectedPhones = new List<Phone>();
-            PhonesDataGrid.ItemsSource = SelectedPhones;
-            LoadSuppliers();
         }
 
-        private void LoadSuppliers()
+        private void btnSearch_Copy_Click(object sender, RoutedEventArgs e)
         {
-            // Logic để load danh sách nhà cung cấp vào SupplierComboBox từ cơ sở dữ liệu
+
         }
 
-        private void SelectPhonesButton_Click(object sender, RoutedEventArgs e)
+        private void btnImport_Click(object sender, RoutedEventArgs e)
         {
-            var selectPhonesWindow = new SelectPhonesWindow();
-            if (selectPhonesWindow.ShowDialog() == true)
+            Import import = new Import();
+
+            if (import != null)
             {
-                foreach (var phone in selectPhonesWindow.SelectedPurchaseOrderDetail)
-                {
-                    SelectedPhones.Add(phone);
-                }
-                PhonesDataGrid.Items.Refresh();
-                UpdateTotalAmount();
+                this.Close();
+                import.Show();
             }
-        }
-
-        private void UpdateTotalAmount()
-        {
-            decimal totalAmount = 0;
-            foreach (var phone in SelectedPhones)
-            {
-                totalAmount += phone.Price * phone.Quantity;
-            }
-            TotalAmountTextBlock.Text = totalAmount.ToString("C");
         }
     }
 }
