@@ -10,6 +10,8 @@
         <Label Content="Management" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14"/>
         <Button Content="Phone" HorizontalAlignment="Center" Name="btnPhone" Margin="0,33,0,0" VerticalAlignment="Top" Width="100" Click="btnPhone_Click"/>
         <Button Content="Supplier" HorizontalAlignment="Center" Name="btnSupplier" Margin="0,60,0,0" VerticalAlignment="Top" Width="100" Click="btnSupplier_Click"/>
+        <Button Content="Order" HorizontalAlignment="Center" Name="btnOrder" Margin="0,86,0,0" VerticalAlignment="Top" Width="100" Click="btnOrder_Click"/>
+        <Button Content="Brand" HorizontalAlignment="Center" x:Name="btnBrand" Margin="0,112,0,0" VerticalAlignment="Top" Width="100" Click="btnBrand_Click"/>
         <Button Content="Sales Order" HorizontalAlignment="Center" Name="btnOrder" Margin="0,86,0,0" VerticalAlignment="Top" Width="100" Click="btnOrder_Click"/>
     </Grid>
 </UserControl>

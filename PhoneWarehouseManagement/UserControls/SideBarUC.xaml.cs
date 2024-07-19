@@ -58,5 +58,16 @@ namespace PhoneWarehouseManagement.UserControls
                 window.Close();
             }
         }
+
+        private void btnBrand_Click(object sender, RoutedEventArgs e)
+        {
+            BrandManagement brandManagement = new BrandManagement();
+            brandManagement.Show();
+            Window window = Window.GetWindow(this);
+            if (window != null)
+            {
+                window.Close();
+            }
+        }
     }
 }
