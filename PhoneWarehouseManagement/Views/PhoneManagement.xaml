@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PhoneWarehouseManagement.Views"
         xmlns:uc="clr-namespace:PhoneWarehouseManagement.UserControls"
         mc:Ignorable="d"
-        Title="PhoneManagement" WindowStartupLocation="CenterScreen" Height="450" Width="800" ResizeMode="NoResize">
+        Title="Phone Management" WindowStartupLocation="CenterScreen" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"></ColumnDefinition>
@@ -23,7 +23,10 @@
                 </RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <ComboBox x:Name="filterByBrand" HorizontalAlignment="Left" Margin="39,0,0,0" VerticalAlignment="Center" Width="87" Height="25" SelectionChanged="filterByBrand_SelectionChanged"/>
+                <ComboBox x:Name="filterByBrand" HorizontalAlignment="Left" Margin="10,14,0,0" VerticalAlignment="Top" Width="87" Height="26" SelectionChanged="filterByBrand_SelectionChanged"/>
+                <TextBox x:Name="txtSearch" HorizontalAlignment="Center" Margin="0,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="197" Height="26" />
+                <Button Content="Search" x:Name="btnSearch" HorizontalAlignment="Left" Margin="341,14,0,0" VerticalAlignment="Top" Height="26" Width="45" Click="btnSearch_Click" />
+                <Button Content="Load" x:Name="btnLoad" HorizontalAlignment="Left" Margin="420,14,0,0" VerticalAlignment="Top" Height="26" Width="45" Click="btnLoad_Click"/>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>

@@ -22,9 +22,9 @@ namespace Services
             repository.AddPhone(phone);
         }
 
-        public void DeletePhone(Phone phone)
+        public void DeletePhone(int phoneId)
         {
-            repository.DeletePhone(phone);
+            repository.DeletePhone(phoneId);
         }
 
         public Phone GetPhoneById(int id)
