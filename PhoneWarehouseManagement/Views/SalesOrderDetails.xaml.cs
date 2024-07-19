@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace PhoneWarehouseManagement.Views
 {
@@ -27,11 +28,12 @@ namespace PhoneWarehouseManagement.Views
             InitializeComponent();
             context = new PhoneWarehouseDbContext();
             _salesOrder = salesOrder;
+            Load();
         }
 
         public void Load()
         {
-            lvDetail.ItemsSource = context.SalesOrderDetails.Where(p => p.SaleOrderId == _salesOrder.SaleOrderId).ToList();
+            lvDetail.ItemsSource = context.SalesOrderDetails.Include(p => p.Phone).Where(p => p.SaleOrderId == _salesOrder.SaleOrderId).ToList();
         }
     }
 }

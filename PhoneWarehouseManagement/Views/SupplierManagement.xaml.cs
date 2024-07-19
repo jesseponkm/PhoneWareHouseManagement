@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using BusinessObjects.Models;
+using Microsoft.IdentityModel.Tokens;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using BusinessObjects.Models;
-using Data_Access_Layer;
 
 namespace PhoneWarehouseManagement.Views
 {
@@ -32,12 +21,12 @@ namespace PhoneWarehouseManagement.Views
 
         private void LoadSupplier()
         {
-            grdSuplier.ItemsSource = context.Suppliers.ToList();
+            grdSuplier.ItemsSource = context.Suppliers.Where(p => p.Status == 1).ToList();
         }
 
         private void grdSuplier_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(grdSuplier.SelectedItem is Supplier supplier)
+            if (grdSuplier.SelectedItem is Supplier supplier)
             {
                 txtId.Text = supplier.SupplierId.ToString();
                 txtName.Text = supplier.SupplierName;
@@ -66,21 +55,152 @@ namespace PhoneWarehouseManagement.Views
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
 
+            if (txtName.Text.Trim().IsNullOrEmpty())
+            {
+                MessageBox.Show("Please input name!");
+                txtName.Focus();
+               
+                return;
+            }
+            if (!IsValidPhoneNumber(txtPhone.Text.Trim()))
+            {
+                MessageBox.Show("Please input valid phone number!");
+                txtPhone.Focus();
+                
+                return;
+            }
+            if (!IsValidEmail(txtEmail.Text.Trim()))
+            {
+                MessageBox.Show("Please input valid email!");
+                txtEmail.Focus();
+              
+                return;
+            }
+            Supplier sp = new Supplier();
+            sp.SupplierName = txtName.Text.Trim();
+            sp.ContactName = txtContactName.Text.Trim();
+            sp.Phone = txtPhone.Text.Trim();
+            sp.Email = txtEmail.Text.Trim();
+            sp.Address = txtAddress.Text.Trim();
+            sp.Status = 1;
+            try
+            {
+                context.Suppliers.Add(sp);
+                if (context.SaveChanges() > 0)
+                {
+                    MessageBox.Show("Added successfully!");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            LoadSupplier();
+
+
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
-
+            txtId.Text = string.Empty;
+            txtName.Text = string.Empty;
+            txtContactName.Text = string.Empty;
+            txtPhone.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtAddress.Text = string.Empty;
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            if (txtId.Text.IsNullOrEmpty())
+            {
+                MessageBox.Show("Please choose a supplier to update!");
+                return;
+            }
+            if (txtName.Text.Trim().IsNullOrEmpty())
+            {
+                MessageBox.Show("Please input name!");
+                txtName.Focus();
+                return;
+            }
+            if (!IsValidPhoneNumber(txtPhone.Text.Trim()))
+            {
+                MessageBox.Show("Please input a valid phone number!");
+                txtPhone.Focus();
+                return;
+            }
+            if (!IsValidEmail(txtEmail.Text.Trim()))
+            {
+                MessageBox.Show("Please input a valid email!");
+                txtEmail.Focus();
+                return;
+            }
 
+           
+            int supplierId = int.Parse(txtId.Text);
+            Supplier existingSupplier = context.Suppliers.FirstOrDefault(s => s.SupplierId == supplierId);
+
+            if (existingSupplier != null)
+            {
+               
+                existingSupplier.SupplierName = txtName.Text.Trim();
+                existingSupplier.ContactName = txtContactName.Text.Trim();
+                existingSupplier.Phone = txtPhone.Text.Trim();
+                existingSupplier.Email = txtEmail.Text.Trim();
+                existingSupplier.Address = txtAddress.Text.Trim();
+                existingSupplier.Status = 1;
+
+                try
+                {
+                    
+                    if (context.SaveChanges() > 0)
+                    {
+                        LoadSupplier();
+                        MessageBox.Show("Updated successfully!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("Are you sure to delete this supplier?","Confirm" ,MessageBoxButton.YesNo, MessageBoxImage.Information);
+            if(result == MessageBoxResult.Yes)
+            {
+                Supplier sp = context.Suppliers.FirstOrDefault(p => p.SupplierId == int.Parse(txtId.Text));
+                if(sp != null)
+                {
+                    sp.Status = 0;
+                    try
+                    {
+                        context.Suppliers.Update(sp);
+                        if (context.SaveChanges() > 0)
+                        {
+                            LoadSupplier();
+                            MessageBox.Show("Deleted successfully!");
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                   
+                }
+                
+            }
+        }
 
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            grdSuplier.ItemsSource = context.Suppliers.Where(p => p.Status == 1 && (p.SupplierName.ToLower().Contains(txtSearch.Text.Trim().ToLower()) ||
+            p.ContactName.ToLower().Contains(txtSearch.Text.Trim().ToLower()) || p.Email.ToLower().Contains(txtSearch.Text.Trim().ToLower()) ||
+            p.Phone.ToLower().Contains(txtSearch.Text.Trim().ToLower())
+            )).ToList();
         }
     }
 }
