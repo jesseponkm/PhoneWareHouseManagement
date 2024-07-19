@@ -23,5 +23,21 @@ namespace PhoneWarehouseManagement.Views
         {
             InitializeComponent();
         }
+
+        private void btnSearch_Copy_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Export_Click(object sender, RoutedEventArgs e)
+        {
+            Export export = new Export();
+            
+            if(export != null)
+            {
+                this.Close();
+                export.Show();
+            }
+        }
     }
 }
