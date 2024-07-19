@@ -1,8 +1,10 @@
 ﻿using BusinessObjects.Models;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,13 +23,13 @@ namespace PhoneWarehouseManagement.Views
     public partial class Export : Window
     {
         List<SalesOrderDetail> salesOrderDetails;
-        private SalesOrder so;
+    
         private readonly PhoneWarehouseDbContext context;
         public Export()
         {
             InitializeComponent();
             context = new PhoneWarehouseDbContext();
-            SalesOrder so = new SalesOrder();
+            
             salesOrderDetails = new List<SalesOrderDetail>();
 
         }
@@ -35,6 +37,7 @@ namespace PhoneWarehouseManagement.Views
         private void Load()
         {
             lvExport.ItemsSource = salesOrderDetails.ToList();
+            totalPrice.Text = salesOrderDetails.Sum(detail => detail.Price).ToString();
         }
 
         private void btnAddPhone_Click(object sender, RoutedEventArgs e)
@@ -55,13 +58,75 @@ namespace PhoneWarehouseManagement.Views
                     salesOrderDetails.Add(add.sod);
                 }
             }
+            
             Load();
         }
 
 
-        private void btnLoad_Click(object sender, RoutedEventArgs e)
+
+        private bool IsValidPhoneNumber(string phoneNumber)
         {
+            // Biểu thức chính quy cho số điện thoại Việt Nam
+            string pattern = @"^(0|\+84)(\d{9})$";
+            return Regex.IsMatch(phoneNumber, pattern);
+        }
+        private void ShowSalesOrderList()
+        {
+            var salesOrderWindow = new PhoneWarehouseManagement.Views.SalesOrder();
+            salesOrderWindow.Show();
+
+            // Optionally close the current window
+            this.Close();
+        }
+
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtName.Text.Trim().IsNullOrEmpty() || !IsValidPhoneNumber(txtPhoneNumber.Text.Trim()))
+            {
+                MessageBox.Show("Please input Name and valid phone number!");
+                return;
+            }
+            try
+            {
+                BusinessObjects.Models.SalesOrder salesOrder = new BusinessObjects.Models.SalesOrder();
+                salesOrder.CustomerName = txtName.Text.Trim();
+                salesOrder.Note = txtNote.Text.Trim();
+                salesOrder.PhoneNumber = txtPhoneNumber.Text.Trim();
+                salesOrder.TotalPrice = salesOrderDetails.Sum(detail => detail.Price);
+                salesOrder.OrderDate = DateTime.Now;
+                context.SalesOrders.Add(salesOrder);
+                context.SaveChanges();
+                var maxId = context.SalesOrders.Max(p => p.SaleOrderId);
+                foreach (var detail in salesOrderDetails)
+                {
+                    detail.SaleOrderId = maxId;
+                    detail.Phone = null;
+                    context.SalesOrderDetails.Add(detail);
+                    context.SaveChanges();
+                }
+                MessageBox.Show("Export successfully!");
+                
+                ShowSalesOrderList();
+            } catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+      
+            ShowSalesOrderList();
+        }
+
+        
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            SalesOrderDetail detail = (sender as FrameworkElement).DataContext as SalesOrderDetail;
+            salesOrderDetails.Remove(detail);
             Load();
         }
+
     }
 }

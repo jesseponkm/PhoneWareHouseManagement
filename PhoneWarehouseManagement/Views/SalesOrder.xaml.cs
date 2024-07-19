@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessObjects.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,14 +20,17 @@ namespace PhoneWarehouseManagement.Views
     /// </summary>
     public partial class SalesOrder : Window
     {
+        private readonly PhoneWarehouseDbContext context;
         public SalesOrder()
-        {
+        {   
             InitializeComponent();
+            context = new PhoneWarehouseDbContext();
+            Load();
         }
 
-        private void btnSearch_Copy_Click(object sender, RoutedEventArgs e)
+        private void Load()
         {
-
+            lvSalesOrder.ItemsSource = context.SalesOrders.ToList();
         }
 
         private void Export_Click(object sender, RoutedEventArgs e)

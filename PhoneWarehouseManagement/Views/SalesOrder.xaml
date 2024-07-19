@@ -26,15 +26,15 @@
                 <Button Content="Search" x:Name="btnSearch" HorizontalAlignment="Left" Margin="422,14,0,0" VerticalAlignment="Top" Height="26" Width="45" />
             </Grid>
             <Grid Grid.Row="1">
-                <ListView Grid.ColumnSpan="2" x:Name="lvSales" >
+                <ListView Grid.ColumnSpan="2" x:Name="lvSalesOrder" >
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Id" Width="auto"  DisplayMemberBinding="{Binding PhoneId}" />
-                            <GridViewColumn Header="Brand" Width="auto"  DisplayMemberBinding="{Binding Brand.BrandName}" />
-                            <GridViewColumn Header="Name" Width="auto"  DisplayMemberBinding="{Binding ModelName}" />
-                            <GridViewColumn Header="Description" Width="auto"  DisplayMemberBinding="{Binding Description}" />
-                            <GridViewColumn Header="Price" Width="auto"  DisplayMemberBinding="{Binding Price}" />
-                            <GridViewColumn Header="Stock" Width="auto"  DisplayMemberBinding="{Binding Stock}" />
+                            <GridViewColumn Header="Id" Width="auto"  DisplayMemberBinding="{Binding SaleOrderId }" />
+                            <GridViewColumn Header="Customer Name" Width="auto"  DisplayMemberBinding="{Binding CustomerName}" />
+                            <GridViewColumn Header="Phone Number" Width="auto"  DisplayMemberBinding="{Binding PhoneNumber}" />
+                            <GridViewColumn Header="Total Price" Width="auto"  DisplayMemberBinding="{Binding TotalPrice}" />
+                            <GridViewColumn Header="Note" Width="auto"  DisplayMemberBinding="{Binding Note}" />
+                            <GridViewColumn Header="Date" Width="auto"  DisplayMemberBinding="{Binding OrderDate}" />
                         </GridView>
                     </ListView.View>
                 </ListView>

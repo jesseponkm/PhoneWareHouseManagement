@@ -11,15 +11,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Button x:Name="btnAddPhone" Content="Add Phone" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="25" Click="btnAddPhone_Click" />
-            <Button x:Name="btnLoad" Content="Reload" HorizontalAlignment="Left" Margin="102,0,0,0" VerticalAlignment="Center" Height="25" Click="btnLoad_Click" />
+            <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="102,0,0,0" VerticalAlignment="Center" Height="25" Width="37" Click="btnBack_Click" />
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <ListView  x:Name="lvExport">
@@ -31,7 +32,7 @@
                             <GridViewColumn Header="Action">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Delete" Width="60" Tag="{Binding}" />
+                                        <Button Content="Delete" x:Name="btnDelete" Click="btnDelete_Click" Width="60" Tag="{Binding}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -39,8 +40,20 @@
                     </ListView.View>
                 </ListView>
             </Grid>
-            <Grid Grid.Column="1"/>
+            <Grid Grid.Column="1">
+                <Label Content="Customer Name" HorizontalAlignment="Left" Margin="29,16,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtName" HorizontalAlignment="Left" Margin="29,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="201" RenderTransformOrigin="0.269,0.1" Height="29"/>
+                <Label Content="Phone Number" HorizontalAlignment="Left" Margin="29,93,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtPhoneNumber" HorizontalAlignment="Left" Margin="29,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="201" RenderTransformOrigin="0.269,0.1" Height="29"/>
+                <Button x:Name="btnExport" Content="Export" HorizontalAlignment="Left" Margin="30,270,0,0" VerticalAlignment="Top" Height="36" Width="103" Click="btnExport_Click" />
+                <Label Content="Note" HorizontalAlignment="Left" Margin="29,0,0,0" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtNote" HorizontalAlignment="Left" Margin="29,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="201" RenderTransformOrigin="0.269,0.1" Height="51"/>
+            </Grid>
         </Grid>
-        <Label Grid.Column="1" Content="Label" HorizontalAlignment="Left" Margin="345,208,0,0" VerticalAlignment="Top"/>
+        <Grid Grid.Row="2">
+            <Label Content="Total Price: " FontSize="13" HorizontalAlignment="Left" Margin="355,5,0,5"/>
+            <TextBlock x:Name="totalPrice" FontSize="13" HorizontalAlignment="Left" Margin="445,10,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+
+        </Grid>
     </Grid>
 </Window>
