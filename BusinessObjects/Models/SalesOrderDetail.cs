@@ -15,8 +15,6 @@ public partial class SalesOrderDetail
 
     public decimal Price { get; set; }
 
-    public int Status { get; set; }
-
     public virtual Phone? Phone { get; set; }
 
     public virtual SalesOrder? SaleOrder { get; set; }
