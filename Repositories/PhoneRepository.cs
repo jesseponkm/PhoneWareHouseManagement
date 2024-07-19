@@ -16,9 +16,9 @@ namespace Repositories
            PhoneDAO.AddPhone(phone);
         }
 
-        public void DeletePhone(Phone phone)
+        public void DeletePhone(int phoneId)
         {
-            PhoneDAO.DeletePhone(phone);
+            PhoneDAO.DeletePhone(phoneId);
         }
 
         public Phone GetPhoneById(int id)

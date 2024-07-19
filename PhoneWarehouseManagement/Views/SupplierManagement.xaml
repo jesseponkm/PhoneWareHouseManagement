@@ -1,12 +1,12 @@
-﻿<Window x:Class="PhoneWarehouseManagement.Views.SuplierManagement"
+﻿<Window x:Class="PhoneWarehouseManagement.Views.SupplierManagement"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PhoneWarehouseManagement.Views"
-                xmlns:uc="clr-namespace:PhoneWarehouseManagement.UserControls"
+        xmlns:uc="clr-namespace:PhoneWarehouseManagement.UserControls"
         mc:Ignorable="d"
-        Title="PhoneManagement" WindowStartupLocation="CenterScreen" Height="450" Width="800" ResizeMode="NoResize">
+        Title="Supplier Management" WindowStartupLocation="CenterScreen" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"></ColumnDefinition>
@@ -32,8 +32,8 @@
                 </Grid.ColumnDefinitions>
                 <DataGrid x:Name="grdSuplier" AutoGenerateColumns="False" SelectionChanged="grdSuplier_SelectionChanged" Grid.ColumnSpan="2">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Width="0.3*" Binding="{Binding SuplierId}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Name" Width="0.6*" Binding="{Binding SuplierName}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Id" Width="0.3*" Binding="{Binding SupplierId}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Name" Width="0.6*" Binding="{Binding SupplierName}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Contact Name" Width="0.7*" Binding="{Binding ContactName}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Phone" Width="0.5*" Binding="{Binding Phone}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Email" Width="0.7*" Binding="{Binding Email}"></DataGridTextColumn>

@@ -13,6 +13,7 @@ namespace Services
         Phone GetPhoneById(int id);
         void AddPhone(Phone phone);
         void UpdatePhone(Phone phone);
-        void DeletePhone(Phone phone);
+        void DeletePhone(int phoneId);
+        
     }
 }

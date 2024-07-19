@@ -37,12 +37,23 @@ namespace PhoneWarehouseManagement.UserControls
             }
         }
 
-        private void btnSuplier_Click(object sender, RoutedEventArgs e)
+        private void btnSupplier_Click(object sender, RoutedEventArgs e)
         {
-            SuplierManagement suplierManagement = new SuplierManagement();
+            SupplierManagement suplierManagement = new SupplierManagement();
             suplierManagement.Show();
             Window window = Window.GetWindow(this);
             if (window != null)
+            {
+                window.Close();
+            }
+        }
+
+        private void btnOrder_Click(object sender, RoutedEventArgs e)
+        {
+            SalesOrder orderManagement = new SalesOrder();
+            orderManagement.Show();
+            Window window = Window.GetWindow(this);
+            if(window != null)
             {
                 window.Close();
             }

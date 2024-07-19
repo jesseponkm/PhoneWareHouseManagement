@@ -60,13 +60,18 @@ namespace Data_Access_Layer
             }
         }
 
-        public static void DeletePhone(Phone phone)
+        public static void DeletePhone(int phoneId)
         {
             try
             {
                 using var context = new PhoneWarehouseDbContext();
-                phone.Status = 0;
-                context.Phones.Update(phone);
+                Phone phone = context.Phones.FirstOrDefault(p => p.PhoneId == phoneId);
+                if(phone != null)
+                {
+                    phone.Status = 0;
+                    context.Phones.Update(phone);
+                    context.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
