@@ -1,0 +1,23 @@
+﻿<Window x:Class="PhoneWarehouseManagement.Views.SelectPhonesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression.blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PhoneWarehouseManagement.Views"
+        mc:Ignorable="d"
+        Title="Select Phones" Height="300" Width="400">
+    <Grid>
+        <DataGrid x:Name="grdSelectedPhone" Margin="10" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Header="Select" Binding="{Binding IsSelected, Mode=TwoWay}" Width="Auto"/>
+                <DataGridTextColumn Header="Phone" Binding="{Binding ModelName}" Width="*"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Bottom">
+            <Button Content="Add Selected" Width="100" Margin="5" Click="AddSelectedButton_Click"/>
+            <Button Content="Cancel" Width="100" Margin="5" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
