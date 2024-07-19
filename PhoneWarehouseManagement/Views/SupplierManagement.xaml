@@ -26,20 +26,18 @@
 
             </Grid>
             <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="12*"/>
-                    <ColumnDefinition Width="7*"/>
-                </Grid.ColumnDefinitions>
-                <DataGrid x:Name="grdSuplier" AutoGenerateColumns="False" SelectionChanged="grdSuplier_SelectionChanged" Grid.ColumnSpan="2">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Width="0.3*" Binding="{Binding SupplierId}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Name" Width="0.6*" Binding="{Binding SupplierName}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Contact Name" Width="0.7*" Binding="{Binding ContactName}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Phone" Width="0.5*" Binding="{Binding Phone}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Email" Width="0.7*" Binding="{Binding Email}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Address" Width="*" Binding="{Binding Address}"></DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <ListView x:Name="grdSuplier" SelectionChanged="grdSuplier_SelectionChanged" Grid.ColumnSpan="2">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Id" Width="Auto" DisplayMemberBinding="{Binding SupplierId}" />
+                            <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding SupplierName}" />
+                            <GridViewColumn Header="Contact Name" Width="Auto" DisplayMemberBinding="{Binding ContactName}" />
+                            <GridViewColumn Header="Phone" Width="Auto" DisplayMemberBinding="{Binding Phone}" />
+                            <GridViewColumn Header="Email" Width="Auto" DisplayMemberBinding="{Binding Email}" />
+                            <GridViewColumn Header="Address" Width="Auto" DisplayMemberBinding="{Binding Address}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
         </Grid>
         <Grid Grid.Column="2">

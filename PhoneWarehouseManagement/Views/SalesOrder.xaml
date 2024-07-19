@@ -5,8 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PhoneWarehouseManagement.Views"
         mc:Ignorable="d"
-        Title="SalesOrder" Height="450" Width="800">
+        xmlns:uc="clr-namespace:PhoneWarehouseManagement.UserControls"
+        Title="Phone Management" WindowStartupLocation="CenterScreen" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <uc:SideBarUC></uc:SideBarUC>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition>
+                </RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Margin="221,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="196" Height="26" />
+                <Button Content="Search" x:Name="btnSearch" HorizontalAlignment="Left" Margin="422,14,0,0" VerticalAlignment="Top" Height="26" Width="45" />
+            </Grid>
+            <Grid Grid.Row="1">
+                <ListView Grid.ColumnSpan="2" x:Name="lvSales" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Id" Width="auto"  DisplayMemberBinding="{Binding PhoneId}" />
+                            <GridViewColumn Header="Brand" Width="auto"  DisplayMemberBinding="{Binding Brand.BrandName}" />
+                            <GridViewColumn Header="Name" Width="auto"  DisplayMemberBinding="{Binding ModelName}" />
+                            <GridViewColumn Header="Description" Width="auto"  DisplayMemberBinding="{Binding Description}" />
+                            <GridViewColumn Header="Price" Width="auto"  DisplayMemberBinding="{Binding Price}" />
+                            <GridViewColumn Header="Stock" Width="auto"  DisplayMemberBinding="{Binding Stock}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </Grid>
+        <Button Content="Export" x:Name="Export" HorizontalAlignment="Left" Margin="645,14,0,0" VerticalAlignment="Top" Height="26" Width="45" Grid.Column="1" Click="Export_Click" />
     </Grid>
 </Window>
