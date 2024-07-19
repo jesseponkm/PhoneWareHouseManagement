@@ -69,5 +69,16 @@ namespace PhoneWarehouseManagement.UserControls
                 window.Close();
             }
         }
+
+        private void btnPurchaseOrder_Click(object sender, RoutedEventArgs e)
+        {
+            PurchaseOrder orderManagement = new PurchaseOrder();
+            orderManagement.Show();
+            Window window = Window.GetWindow(this);
+            if (window != null)
+            {
+                window.Close();
+            }
+        }
     }
 }

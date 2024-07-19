@@ -5,19 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PhoneWarehouseManagement.Views"
         mc:Ignorable="d"
-        Title="Select Phones" Height="300" Width="400">
+        Title="Select Phones" Height="400" Width="500">
     <Grid>
-        <DataGrid x:Name="grdSelectedPhone" Margin="10" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridCheckBoxColumn Header="Select" Binding="{Binding IsSelected, Mode=TwoWay}" Width="Auto"/>
-                <DataGridTextColumn Header="Phone" Binding="{Binding ModelName}" Width="*"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
-
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Bottom">
-            <Button Content="Add Selected" Width="100" Margin="5" Click="AddSelectedButton_Click"/>
-            <Button Content="Cancel" Width="100" Margin="5" Click="CancelButton_Click"/>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <ComboBox x:Name="filterByBrand" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="87" Height="26" SelectionChanged="filterByBrand_SelectionChanged"/>
+            <TextBox x:Name="txtSearch" HorizontalAlignment="Center" TextWrapping="Wrap"  VerticalAlignment="Center" Width="196" Height="26" />
+            <Button Content="Search" x:Name="btnSearch" HorizontalAlignment="Left" Margin="341,0,0,0" VerticalAlignment="Center" Height="26" Width="45" Click="btnSearch_Click" />
+            <Button Content="Load" x:Name="btnLoad" HorizontalAlignment="Left" Margin="420,0,0,0" VerticalAlignment="Center" Height="26" Width="45" Click="btnLoad_Click"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ListView Grid.ColumnSpan="2" x:Name="grdPhone" SelectionChanged="grdPhone_SelectionChanged" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Id" Width="auto"  DisplayMemberBinding="{Binding PhoneId}" />
+                        <GridViewColumn Header="Brand" Width="auto"  DisplayMemberBinding="{Binding Brand.BrandName}" />
+                        <GridViewColumn Header="Name" Width="auto"  DisplayMemberBinding="{Binding ModelName}" />
+                        <GridViewColumn Header="Price" Width="auto"  DisplayMemberBinding="{Binding Price}" />
+                        <GridViewColumn Header="Stock" Width="auto"  DisplayMemberBinding="{Binding Stock}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Label Content="Id" HorizontalAlignment="Left" Margin="44,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.987,1.061"/>
+            <TextBox x:Name="txtId" IsReadOnly="True" HorizontalAlignment="Left" Margin="69,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" Height="26"/>
+            <Label Content="Quantity" HorizontalAlignment="Left" Margin="181,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.987,1.061"/>
+            <TextBox x:Name="txtQuantity" HorizontalAlignment="Left" Margin="250,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" Height="26"/>
+            <Button Content="Add" x:Name="btnAdd" HorizontalAlignment="Left" Margin="367,21,0,0" VerticalAlignment="Top" Height="26" Width="45" Click="btnAdd_Click"/>
+            <Button Content="Cancel" x:Name="btnCancel" HorizontalAlignment="Left" Margin="431,21,0,0" VerticalAlignment="Top" Height="26" Width="45" Click="btnCancel_Click" />
+        </Grid>
     </Grid>
 </Window>

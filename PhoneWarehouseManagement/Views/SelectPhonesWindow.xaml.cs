@@ -1,4 +1,5 @@
 ﻿using BusinessObjects.Models;
+using Microsoft.IdentityModel.Tokens;
 using Services;
 using System;
 using System.Collections.Generic;
@@ -22,50 +23,103 @@ namespace PhoneWarehouseManagement.Views
     public partial class SelectPhonesWindow : Window
     {
         private readonly IPhoneService phoneService;
-        public List<PurchaseOrderDetail> SelectedPurchaseOrderDetail { get; private set; }
-        public List<Phone> AllPhones { get; private set; }
-        public List<PurchaseOrderDetail> purchaseOrderDetails { get; private set; }
-
+        private readonly IBrandService brandService;
+        public PurchaseOrderDetail pod;
         public SelectPhonesWindow()
         {
             InitializeComponent();
-            SelectedPurchaseOrderDetail = new List<Phone>();
-            LoadPhones();
-            PhonesDataGrid.ItemsSource = AllPhones;
+            phoneService = new PhoneService();
+            brandService = new BrandService();
+            LoadPhone();
+            LoadFilterBrand();
+        }
+        private void LoadPhone()
+        {
+            grdPhone.ItemsSource = phoneService.GetPhones();
         }
 
-        private void LoadPhones()
+        private void grdPhone_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Sử dụng IPhoneService để lấy danh sách điện thoại từ cơ sở dữ liệu
-            IPhoneService phoneService = new PhoneService();
-            var phones = phoneService.GetPhones();
-            AllPhones = phones.Select(p => new Phone(p)).ToList();
-        }
-
-        private void AddSelectedButton_Click(object sender, RoutedEventArgs e)
-        {
-            if(grdSelectedPhone.SelectedItem is Phone selected)
+            if (grdPhone.SelectedItem is Phone phone)
             {
-                PurchaseOrderDetail detail = new PurchaseOrderDetail();
-                detail.Phone
-                
+                txtId.Text = phone.PhoneId.ToString();
             }
-
-            foreach (var phone in AllPhones.Where(p => p.IsSelected))
+        }
+        private void LoadFilterBrand()
+        {
+            var brands = brandService.GetBrands().ToList();
+            var filterBrands = new List<Brand>();
+            filterBrands.Add(new Brand { BrandId = -1, BrandName = "All", Phones = phoneService.GetPhones() });
+            filterBrands.AddRange(brands);
+            filterByBrand.ItemsSource = filterBrands;
+            filterByBrand.DisplayMemberPath = "BrandName";
+            filterByBrand.SelectedValuePath = "BrandId";
+            filterByBrand.SelectedIndex = 0;
+        }
+        private void filterByBrand_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (filterByBrand.SelectedItem is Brand brand)
             {
-                SelectedPurchaseOrderDetail.Add(new Phone
+                grdPhone.ItemsSource = brand.Phones.Where(p => p.Status == 1 && p.ModelName.ToLower().Contains(txtSearch.Text.Trim().ToLower())).ToList();
+            }
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            if (filterByBrand.SelectedItem is Brand brand)
+            {
+                if (brand.BrandId != -1)
+                    grdPhone.ItemsSource = brand.Phones.Where(p => p.Status == 1 && p.ModelName.ToLower().Contains(txtSearch.Text.Trim().ToLower())).ToList();
+                else
                 {
-                    ModelName = phone.ModelName,
-                    Price = phone.Price,
-                    Quantity = 1 // hoặc số lượng người dùng nhập vào
-                });
+                    grdPhone.ItemsSource = phoneService.GetPhones().Where(p => p.Status == 1 && p.ModelName.ToLower().Contains(txtSearch.Text.Trim().ToLower()));
+                }
             }
-            this.DialogResult = true;
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void btnLoad_Click(object sender, RoutedEventArgs e)
+        {
+            txtSearch.Text = string.Empty;
+            LoadFilterBrand();
+            LoadPhone();
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtId.Text.Trim().IsNullOrEmpty())
+            {
+                MessageBox.Show("Please choose a product!");
+                return;
+            }
+            if (!txtQuantity.Text.Trim().IsNullOrEmpty())
+            {
+                if (int.TryParse(txtQuantity.Text.Trim(), out int quantity))
+                {
+                    if (grdPhone.SelectedItem is Phone phone)
+                    {
+                        var newPod = new PurchaseOrderDetail
+                        {
+                            Quantity = quantity,
+                            Price = phone.Price,
+                            PhoneId = phone.PhoneId,
+                            Phone = phone
+                        };
+                        pod = newPod; // Set the new SalesOrderDetail
+                        this.DialogResult = true;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please input the quantity of product that want to export!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
+
         }
+
     }
 }
