@@ -96,12 +96,15 @@ namespace PhoneWarehouseManagement.Views
                 salesOrder.OrderDate = DateTime.Now;
                 context.SalesOrders.Add(salesOrder);
                 context.SaveChanges();
-                var maxId = context.SalesOrders.Max(p => p.SaleOrderId);
+                var salesOrderId = context.SalesOrders.Max(p => p.SaleOrderId);
                 foreach (var detail in salesOrderDetails)
                 {
-                    detail.SaleOrderId = maxId;
+                    detail.SaleOrderId = salesOrderId;
+                    Phone phone = context.Phones.FirstOrDefault(p => p.PhoneId == detail.PhoneId);
+                    phone.Stock = phone.Stock - detail.Quantity; ;
                     detail.Phone = null;
                     context.SalesOrderDetails.Add(detail);
+                    context.Phones.Update(phone);
                     context.SaveChanges();
                 }
                 MessageBox.Show("Export successfully!");
@@ -109,7 +112,7 @@ namespace PhoneWarehouseManagement.Views
                 ShowSalesOrderList();
             } catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                MessageBox.Show(ex.Message);
             }
             
         }

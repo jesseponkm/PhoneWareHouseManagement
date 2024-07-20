@@ -53,5 +53,13 @@ namespace PhoneWarehouseManagement.Views
                 detail.ShowDialog();
             }
         }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            
+            lvSalesOrder.ItemsSource = context.SalesOrders.Where(p => p.CustomerName.ToLower().Contains(txtSearch.Text.Trim().ToLower()) ||
+            p.PhoneNumber.Contains(txtSearch.Text.Trim())
+            ).ToList();
+        }
     }
 }

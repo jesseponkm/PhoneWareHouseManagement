@@ -22,8 +22,12 @@
                 </RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Margin="221,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="196" Height="26" />
-                <Button Content="Search" x:Name="btnSearch" HorizontalAlignment="Left" Margin="422,14,0,0" VerticalAlignment="Top" Height="26" Width="45" />
+                <Label FontSize="10" Content="Start Date:" VerticalAlignment="Center" Margin="0,0,638,0"/>
+                <DatePicker x:Name="dpStartDate" Margin="67,14,516,10"/>
+                <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Margin="368,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="196" Height="26" />
+                <Button Content="Search" x:Name="btnSearch" HorizontalAlignment="Left" Margin="564,14,0,0" VerticalAlignment="Top" Height="26" Width="45" Click="btnSearch_Click" />
+                <Label FontSize="10" Content="End Date:" VerticalAlignment="Top" Margin="184,17,459,0"/>
+                <DatePicker x:Name="dpEndate" Margin="246,14,337,10"/>
             </Grid>
             <Grid Grid.Row="1">
                 <ListView Grid.ColumnSpan="2" x:Name="lvSalesOrder" >
