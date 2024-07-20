@@ -37,10 +37,10 @@
             <TextBox x:Name="txtBrandId" IsReadOnly="True" HorizontalAlignment="Left" Margin="10,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.475,0.514" Height="30"/>
             <Label Grid.Column="2" Content="Name" HorizontalAlignment="Left" Margin="5,116,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="txtBrandName" HorizontalAlignment="Left" Margin="10,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.475,0.514" Height="30"/>
-            <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top" Height="30" Width="80"/>
-            <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="10,253,0,0" VerticalAlignment="Top" Height="30" Width="80"/>
-            <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="10,314,0,0" VerticalAlignment="Top" Height="30" Width="80"/>
-            <Button x:Name="btnRefresh" Content="Refresh" HorizontalAlignment="Left" Margin="10,374,0,0" VerticalAlignment="Top" Height="30" Width="80"/>
+            <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top" Height="30" Width="80" Click="btnAdd_Click"/>
+            <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="10,253,0,0" VerticalAlignment="Top" Height="30" Width="80" Click="btnUpdate_Click"/>
+            <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="10,314,0,0" VerticalAlignment="Top" Height="30" Width="80" Click="btnDelete_Click"/>
+            <Button x:Name="btnRefresh" Content="Refresh" HorizontalAlignment="Left" Margin="10,374,0,0" VerticalAlignment="Top" Height="30" Width="80" Click="btnRefresh_Click"/>
 
         </Grid>
     </Grid>
