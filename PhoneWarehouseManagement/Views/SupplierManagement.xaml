@@ -23,6 +23,8 @@
                 </RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
+                <TextBox x:Name="txtSearch" HorizontalAlignment="Center" Margin="0,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="197" Height="26" />
+                <Button Content="Search" x:Name="btnSearch" HorizontalAlignment="Left" Margin="341,14,0,0" VerticalAlignment="Top" Height="26" Width="45" Click="btnSearch_Click" />
 
             </Grid>
             <Grid Grid.Row="1">
@@ -41,16 +43,16 @@
             </Grid>
         </Grid>
         <Grid Grid.Column="2">
-            <Label Grid.Column="2" Content="Id" HorizontalAlignment="Left" Margin="5,50,0,0" VerticalAlignment="Top"/>
+            <Label Grid.Column="2"  Content="Id" HorizontalAlignment="Left" Margin="5,50,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="txtId" IsReadOnly="True" HorizontalAlignment="Left" Margin="10,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.475,0.514" Height="25"/>
             <Label Content="Name" HorizontalAlignment="Left" Margin="108,50,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtName" IsReadOnly="True" HorizontalAlignment="Left" Margin="113,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.475,0.514" Height="25"/>
+            <TextBox x:Name="txtName"  HorizontalAlignment="Left" Margin="113,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.475,0.514" Height="25"/>
             <Label Grid.Column="2" Content="Contact Name" HorizontalAlignment="Left" Margin="5,116,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="txtContactName" HorizontalAlignment="Left" Margin="10,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.475,0.514" Height="25"/>
             <Label Grid.Column="2" Content="Phone" HorizontalAlignment="Left" Margin="108,116,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="txtPhone" Grid.Column="2" HorizontalAlignment="Left" Margin="113,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.475,0.514" Height="25"/>
             <Label Content="Email" HorizontalAlignment="Left" Margin="5,177,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="10,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.475,0.514" Height="25"/>
+            <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="10,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" RenderTransformOrigin="0.475,0.514" Height="25"/>
             <Label Content="Address" HorizontalAlignment="Left" Margin="5,240,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="txtAddress" HorizontalAlignment="Left" Margin="10,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" RenderTransformOrigin="0.475,0.514" Height="50"/>
             <Button Content="Clear" Width="80" x:Name="btnClear" HorizontalAlignment="Left" Margin="113,343,0,0" VerticalAlignment="Top" Click="btnClear_Click" />

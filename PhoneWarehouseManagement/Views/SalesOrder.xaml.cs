@@ -43,5 +43,15 @@ namespace PhoneWarehouseManagement.Views
                 export.Show();
             }
         }
+
+        private void btnDetail_Click(object sender, RoutedEventArgs e)
+        {
+             var salesOrder = (sender as FrameworkElement).DataContext as BusinessObjects.Models.SalesOrder;
+            if(salesOrder != null)
+            {
+                SalesOrderDetails detail = new SalesOrderDetails(salesOrder);
+                detail.ShowDialog();
+            }
+        }
     }
 }
