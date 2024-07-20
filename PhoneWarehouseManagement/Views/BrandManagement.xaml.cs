@@ -31,5 +31,47 @@ namespace PhoneWarehouseManagement.Views
                 txtBrandName.Text = selected.BrandName.ToString();
             }
         }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            refresh();
+        }
+        private void refresh()
+        {
+            txtBrandId.Text = "";
+            txtBrandName.Text = "";
+            loadBrand();
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtBrandName.Text != null)
+            {
+                Brand brand = new Brand();
+                brand.BrandName = txtBrandName.Text;
+                brandService.AddBrand(brand);
+            } else
+            {
+                MessageBox.Show("BrandName not null");
+            }
+        }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            if (grdBrand.SelectedItem is Brand selected)
+            {
+                selected.BrandName = txtBrandName.Text;
+                brandService.UpdateBrand(selected);
+            }
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (grdBrand.SelectedItem is Brand selected)
+            {
+                selected.Status = 0;
+                brandService.UpdateBrand(selected);
+            }
+        }
     }
 }

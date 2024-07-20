@@ -27,12 +27,14 @@ namespace PhoneWarehouseManagement.Views
         private PurchaseOrder po;
         List<PurchaseOrderDetail> purchaseOrderDetails;
         private readonly PhoneWarehouseDbContext context;
+        private readonly IPhoneService phoneService;
 
         public Import()
         {
             InitializeComponent();
             context = new PhoneWarehouseDbContext();
             PurchaseOrder po = new PurchaseOrder();
+            phoneService = new PhoneService();
             purchaseOrderDetails = new List<PurchaseOrderDetail>();
             load();
             LoadSuppliers();
@@ -91,9 +93,12 @@ namespace PhoneWarehouseManagement.Views
                 var maxId = context.PurchaseOrders.Max(p => p.OrderId);
                 foreach (var detail in purchaseOrderDetails)
                 {
+                    Phone phone = phoneService.GetPhoneById(int.Parse(detail.PhoneId.ToString()));
+                    phone.Stock += detail.Quantity;
                     detail.OrderId = maxId;
                     detail.Phone = null;
                     context.PurchaseOrderDetails.Add(detail);
+                    context.Phones.Update(phone);
                     context.SaveChanges();
                 }
                 MessageBox.Show("Import successfully!");
