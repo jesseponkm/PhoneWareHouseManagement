@@ -10,10 +10,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace PhoneWarehouseManagement.Views
 {
@@ -35,15 +37,26 @@ namespace PhoneWarehouseManagement.Views
             load();
             LoadSuppliers();
         }
+        
 
         private void load()
         {
             grdImportOrder.ItemsSource = purchaseOrderDetails.ToList();
+            decimal totalPrice = 0;
+            foreach (PurchaseOrderDetail detail in purchaseOrderDetails)
+            {
+                totalPrice += detail.Price * detail.Quantity;
+            }
+            tbTotalPrice.Text = totalPrice.ToString();
         }
 
         private void LoadSuppliers()
         {
-            // Logic để load danh sách nhà cung cấp vào SupplierComboBox từ cơ sở dữ liệu
+            cbbSupplier.ItemsSource = context.Suppliers.ToList();
+            cbbSupplier.DisplayMemberPath = "SupplierName";
+            cbbSupplier.SelectedValuePath = "SupplierId";
+            cbbSupplier.SelectedIndex = 0;
+            
         }
 
         private void SelectPhonesButton_Click(object sender, RoutedEventArgs e)
@@ -67,11 +80,43 @@ namespace PhoneWarehouseManagement.Views
 
         private void btnSaveOrder_Click(object sender, RoutedEventArgs e)
         {
-            PurchaseOrder po = new PurchaseOrder();
-            foreach (var detail in purchaseOrderDetails)
+            try
             {
+                BusinessObjects.Models.PurchaseOrder purchasesOrder = new BusinessObjects.Models.PurchaseOrder();
+                purchasesOrder.SupplierId = int.Parse(cbbSupplier.SelectedValue.ToString());
+                purchasesOrder.TotalAmount = decimal.Parse(tbTotalPrice.Text.Trim());  
+                purchasesOrder.OrderDate = DateTime.Now;
+                context.PurchaseOrders.Add(purchasesOrder);
+                context.SaveChanges();
+                var maxId = context.PurchaseOrders.Max(p => p.OrderId);
+                foreach (var detail in purchaseOrderDetails)
+                {
+                    detail.OrderId = maxId;
+                    detail.Phone = null;
+                    context.PurchaseOrderDetails.Add(detail);
+                    context.SaveChanges();
+                }
+                MessageBox.Show("Import successfully!");
 
+                ShowPurchaseOrderList();
             }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            PurchaseOrderDetail detail = (sender as FrameworkElement).DataContext as PurchaseOrderDetail;
+            purchaseOrderDetails.Remove(detail);
+            load();
+        }
+
+        private void ShowPurchaseOrderList()
+        {
+            var purchaseOrdersWindow = new PhoneWarehouseManagement.Views.PurchaseOrder();
+            purchaseOrdersWindow.Show();
+            this.Close();
         }
     }
 }

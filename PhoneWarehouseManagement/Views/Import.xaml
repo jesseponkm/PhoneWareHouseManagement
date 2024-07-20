@@ -15,7 +15,7 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
             <TextBlock Text="Supplier:" VerticalAlignment="Center"/>
-            <ComboBox Name="SupplierComboBox" Width="200" Margin="5"/>
+            <ComboBox x:Name="cbbSupplier" Width="200" Margin="5"/>
             <Button Content="Select Phones" Width="120" Margin="5" Click="SelectPhonesButton_Click"/>
         </StackPanel>
 
@@ -27,7 +27,7 @@
                 <DataGridTemplateColumn Header="Action" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="btnDelete" Content="Delete" Width="60" Tag="{Binding}" />
+                            <Button x:Name="btnDelete" Content="Delete" Click="btnDelete_Click" Width="60" Tag="{Binding}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -35,8 +35,8 @@
         </DataGrid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <TextBlock Text="Total Amount:" VerticalAlignment="Center"/>
-            <TextBlock Name="TotalAmountTextBlock" Width="100" Margin="5" VerticalAlignment="Center"/>
+            <TextBlock Text="Total Price:" VerticalAlignment="Center"/>
+            <TextBlock x:Name="tbTotalPrice" Width="100" Margin="5" VerticalAlignment="Center"/>
             <Button x:Name="btnSaveOrder" Content="Save Order" Width="100" Margin="5" Click="btnSaveOrder_Click"/>
         </StackPanel>
     </Grid>

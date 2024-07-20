@@ -1,4 +1,5 @@
 ﻿using BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
 using Services;
 using System;
 using System.Collections.Generic;
@@ -22,12 +23,24 @@ namespace PhoneWarehouseManagement.Views
     /// </summary>
     public partial class PurchaseOrder : Window
     {
+        private readonly PhoneWarehouseDbContext context;
         public PurchaseOrder()
         {
             InitializeComponent();
+            context = new PhoneWarehouseDbContext();
+            Load();
+        }
+        private void Load()
+        {
+            lvPurchasesOrder.ItemsSource = context.PurchaseOrders.Include(p => p.Supplier).ToList();
         }
 
         private void btnSearch_Copy_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDetail_Click(object sender, RoutedEventArgs e)
         {
 
         }

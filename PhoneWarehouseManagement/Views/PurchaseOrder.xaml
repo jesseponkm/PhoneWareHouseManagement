@@ -22,24 +22,30 @@
                 </RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Margin="221,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="196" Height="26" />
-                <Button Content="Search" x:Name="btnSearch" HorizontalAlignment="Left" Margin="422,14,0,0" VerticalAlignment="Top" Height="26" Width="45" />
+                <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Margin="26,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="196" Height="26" />
+                <Button Content="Search" x:Name="btnSearch" HorizontalAlignment="Left" Margin="227,14,0,0" VerticalAlignment="Top" Height="26" Width="69" />
             </Grid>
             <Grid Grid.Row="1">
-                <ListView Grid.ColumnSpan="2" x:Name="lvSales" >
+                <ListView Grid.ColumnSpan="2" x:Name="lvPurchasesOrder" >
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Id" Width="auto"  DisplayMemberBinding="{Binding PhoneId}" />
-                            <GridViewColumn Header="Brand" Width="auto"  DisplayMemberBinding="{Binding Brand.BrandName}" />
-                            <GridViewColumn Header="Name" Width="auto"  DisplayMemberBinding="{Binding ModelName}" />
-                            <GridViewColumn Header="Description" Width="auto"  DisplayMemberBinding="{Binding Description}" />
-                            <GridViewColumn Header="Price" Width="auto"  DisplayMemberBinding="{Binding Price}" />
-                            <GridViewColumn Header="Stock" Width="auto"  DisplayMemberBinding="{Binding Stock}" />
+                            <GridViewColumn Header="Id" Width="auto"  DisplayMemberBinding="{Binding OrderId }" />
+                            <GridViewColumn Header="Customer Name" Width="auto"  DisplayMemberBinding="{Binding Supplier.SupplierName}" />
+                            <GridViewColumn Header="Phone Number" Width="auto"  DisplayMemberBinding="{Binding Supplier.Phone}" />
+                            <GridViewColumn Header="Total Price" Width="auto"  DisplayMemberBinding="{Binding TotalAmount}" />
+                            <GridViewColumn Header="Date" Width="auto"  DisplayMemberBinding="{Binding OrderDate}" />
+                            <GridViewColumn Header="Action">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Detail" x:Name="btnDetail" Click="btnDetail_Click" Width="60" Tag="{Binding}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>
             </Grid>
         </Grid>
-        <Button Content="Import" x:Name="btnImport" HorizontalAlignment="Left" Margin="645,14,0,0" VerticalAlignment="Top" Height="26" Width="45" Grid.Column="1" Click="btnImport_Click"/>
+        <Button Content="Import" x:Name="btnImport" HorizontalAlignment="Left" Margin="603,14,0,0" VerticalAlignment="Top" Height="26" Width="62" Grid.Column="1" Click="btnImport_Click"/>
     </Grid>
 </Window>
