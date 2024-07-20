@@ -42,7 +42,12 @@ namespace PhoneWarehouseManagement.Views
 
         private void btnDetail_Click(object sender, RoutedEventArgs e)
         {
-
+            var purchasesOrder = (sender as FrameworkElement).DataContext as BusinessObjects.Models.PurchaseOrder;
+            if (purchasesOrder != null)
+            {
+                PurchaseOrderDetails detail = new PurchaseOrderDetails(purchasesOrder);
+                detail.ShowDialog();
+            }
         }
 
         private void btnImport_Click(object sender, RoutedEventArgs e)
